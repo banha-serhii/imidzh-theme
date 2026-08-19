@@ -1,0 +1,15 @@
+---
+description: Canonical menu and URL policy
+globs: "{inc/menu-setup.php,inc/class-mega-menu-walker.php,header.php,THEME.md}"
+alwaysApply: false
+---
+
+# Menu and URL Policy
+
+- Use canonical local slugs only (`/about/`, `/transparency/`, `/education/`, `/parents/`, `/safety/`, `/teachers/`, `/news/`, `/contacts/`).
+- Never use external temporary sources (e.g., wixsite URLs) in menu code.
+- Do not reintroduce legacy slugs like `/novyny/`, `/prozorist/`, `/navchannya/`, `/pro-litsej/`.
+- Top-level parent items must be real pages, not `#`.
+- Primary menu should not include `Головна` if brand logo is home link.
+- Keep menu setup idempotent; avoid duplicate pages/menu items on repeated runs.
+

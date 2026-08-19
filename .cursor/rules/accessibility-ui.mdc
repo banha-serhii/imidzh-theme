@@ -1,0 +1,16 @@
+---
+description: Accessibility requirements for UI and interactions
+globs: "{*.php,assets/js/*.js,assets/css/*.css,style.css}"
+alwaysApply: false
+---
+
+# Accessibility UI Rule
+
+- Preserve WCAG 2.1 AA keyboard behavior for menu and search.
+- Every interactive element must be reachable and operable by keyboard.
+- Keep clear visible focus states (`:focus-visible`).
+- Do not remove skip link or landmark roles.
+- Respect min touch target size (~44px) on mobile controls.
+- Keep `aria-expanded`, `aria-controls`, and labels in sync with JS state.
+- Avoid introducing motion-heavy effects without reduced-motion fallback.
+

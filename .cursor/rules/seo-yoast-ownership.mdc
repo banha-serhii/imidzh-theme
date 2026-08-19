@@ -1,0 +1,15 @@
+---
+description: SEO ownership and Yoast-safe integration policy
+globs: "{inc/yoast-seo.php,header.php,functions.php}"
+alwaysApply: false
+---
+
+# SEO and Yoast Ownership
+
+- Yoast is the primary owner for title, canonical, OG, and meta tags.
+- Do not print duplicate title/canonical/meta tags from theme code.
+- Extend schema carefully and avoid duplicate Organization entities.
+- Keep canonical URLs aligned with approved slug map.
+- Avoid noindex/noarchive broad rules unless explicitly requested.
+- Any fallback SEO behavior must no-op safely when Yoast is active.
+

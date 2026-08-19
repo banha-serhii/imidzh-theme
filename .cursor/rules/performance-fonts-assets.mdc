@@ -1,0 +1,15 @@
+---
+description: Performance rules for fonts and static assets
+globs: "{inc/fonts.php,assets/css/*.css,functions.php}"
+alwaysApply: false
+---
+
+# Performance and Asset Policy
+
+- Prefer self-hosted assets over runtime third-party dependencies.
+- Do not add Google Fonts runtime calls after fonts migration.
+- Preload only truly critical assets; avoid mass preloads.
+- Keep image dimensions explicit in markup to reduce layout shift.
+- Use optimized formats (`webp/png`) for theme assets.
+- Keep CSS/JS additions focused; avoid large global overrides when module styles are enough.
+

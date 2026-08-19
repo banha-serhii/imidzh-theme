@@ -4,10 +4,10 @@
  *
  * Appearance → Menus structure:
  * Level 0 — top bar items
- * Level 1 — dropdown links OR mega column titles (if parent has class `mega-menu--columns`)
- * Level 2 — links inside a mega column
+ * Level 1 — dropdown links (canonical IA is two levels)
+ * Optional legacy: class `mega-menu--columns` / `mega` treats level 1 as column titles (level 2 = links)
  *
- * Add CSS class `mega-menu--columns` (or `mega`) on a top-level item to enable multi-column panel.
+ * Class `mega-menu--wide` on a top-level item: keep a simple 2-level list, CSS makes two columns.
  *
  * @package Imidzh
  */
@@ -22,6 +22,13 @@ class Imidzh_Mega_Menu_Walker extends Walker_Nav_Menu {
 	 * @var bool
 	 */
 	private $is_mega = false;
+
+	/**
+	 * Current top-level item uses a two-column simple panel.
+	 *
+	 * @var bool
+	 */
+	private $is_wide = false;
 
 	/**
 	 * Panel id for the open top-level parent.
@@ -42,6 +49,10 @@ class Imidzh_Mega_Menu_Walker extends Walker_Nav_Menu {
 			$panel_class = $this->is_mega
 				? 'mega-menu__panel mega-menu__panel--mega'
 				: 'mega-menu__panel mega-menu__panel--simple';
+
+			if ( $this->is_wide && ! $this->is_mega ) {
+				$panel_class .= ' mega-menu__panel--wide';
+			}
 
 			$id_attr = $this->panel_id ? ' id="' . esc_attr( $this->panel_id ) . '"' : '';
 
@@ -71,6 +82,7 @@ class Imidzh_Mega_Menu_Walker extends Walker_Nav_Menu {
 			$output .= "{$indent}\t</ul>\n";
 			$output .= "{$indent}</div><!-- .mega-menu__panel -->\n";
 			$this->is_mega  = false;
+			$this->is_wide  = false;
 			$this->panel_id = '';
 			return;
 		}
@@ -93,6 +105,7 @@ class Imidzh_Mega_Menu_Walker extends Walker_Nav_Menu {
 
 		if ( 0 === $depth ) {
 			$this->is_mega = in_array( 'mega-menu--columns', $classes, true ) || in_array( 'mega', $classes, true );
+			$this->is_wide = in_array( 'mega-menu--wide', $classes, true );
 			if ( $this->is_mega ) {
 				$classes[] = 'mega-menu--columns';
 			}

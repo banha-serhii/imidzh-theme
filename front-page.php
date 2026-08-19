@@ -41,10 +41,10 @@ $has_slider  = (bool) $slider_html;
 							<?php esc_html_e( 'Ужгородський ліцей «Імідж» створює безпечне, сучасне та інклюзивне середовище для всебічного розвитку кожного учня.', 'imidzh' ); ?>
 						</p>
 						<div class="hero__actions">
-							<a class="btn btn--accent" href="<?php echo esc_url( home_url( '/pro-litsej/' ) ); ?>">
+							<a class="btn btn--accent" href="<?php echo esc_url( home_url( '/about/' ) ); ?>">
 								<?php esc_html_e( 'Дізнатися більше', 'imidzh' ); ?>
 							</a>
-							<a class="btn btn--outline" href="#contacts">
+							<a class="btn btn--outline" href="<?php echo esc_url( home_url( '/contacts/' ) ); ?>">
 								<?php esc_html_e( "Зв'язатися з нами", 'imidzh' ); ?>
 							</a>
 						</div>
@@ -58,7 +58,7 @@ $has_slider  = (bool) $slider_html;
 							<p class="hero__card-text">
 								<?php esc_html_e( 'Триває прийом документів для вступу до 1-х та 10-х класів на новий навчальний рік.', 'imidzh' ); ?>
 							</p>
-							<a class="hero__card-link" href="<?php echo esc_url( home_url( '/vstup/' ) ); ?>">
+							<a class="hero__card-link" href="<?php echo esc_url( home_url( '/parents/admission/' ) ); ?>">
 								<?php esc_html_e( 'Графік прийому та перелік документів', 'imidzh' ); ?> &rarr;
 							</a>
 						</aside>
@@ -74,7 +74,7 @@ $has_slider  = (bool) $slider_html;
 		<section id="news" aria-labelledby="news-heading">
 			<div class="section-header">
 				<h2 id="news-heading" class="section-title"><?php esc_html_e( 'Останні новини', 'imidzh' ); ?></h2>
-				<a class="section-header__link" href="<?php echo esc_url( get_permalink( get_option( 'page_for_posts' ) ) ?: home_url( '/novyny/' ) ); ?>">
+				<a class="section-header__link" href="<?php echo esc_url( get_permalink( get_option( 'page_for_posts' ) ) ?: home_url( '/news/' ) ); ?>">
 					<?php esc_html_e( 'Усі новини', 'imidzh' ); ?> &rarr;
 				</a>
 			</div>

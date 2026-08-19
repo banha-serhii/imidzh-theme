@@ -1,0 +1,15 @@
+---
+description: Core WordPress standards for this theme
+alwaysApply: true
+---
+
+# WordPress Core Standards
+
+- Keep feature logic in `inc/*.php`; keep templates minimal.
+- Escape output by context: `esc_html`, `esc_attr`, `esc_url`, `wp_kses`.
+- Sanitize all user/config input before save or use.
+- Add `defined( 'ABSPATH' ) || exit;` to PHP modules.
+- Use existing text domain `imidzh` for translatable strings.
+- Avoid direct SQL unless absolutely required and prepared.
+- Do not add site-wide side effects on every request; use idempotent setup.
+

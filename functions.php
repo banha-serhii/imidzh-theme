@@ -26,33 +26,6 @@ if ( file_exists( IMIDZH_DIR . '/inc/yoast-seo.php' ) ) {
 }
 
 /**
- * Fallback primary menu when no menu is assigned.
- */
-if ( ! function_exists( 'imidzh_fallback_menu' ) ) {
-	function imidzh_fallback_menu() {
-		$items = array(
-			array( 'url' => home_url( '/about/' ), 'label' => __( 'Про ліцей', 'imidzh' ) ),
-			array( 'url' => home_url( '/transparency/' ), 'label' => __( 'Прозорість та звітність', 'imidzh' ) ),
-			array( 'url' => home_url( '/education/' ), 'label' => __( 'Освітній процес', 'imidzh' ) ),
-			array( 'url' => home_url( '/parents/' ), 'label' => __( 'Вступникам та батькам', 'imidzh' ) ),
-			array( 'url' => home_url( '/safety/' ), 'label' => __( 'Безпека та захист', 'imidzh' ) ),
-			array( 'url' => home_url( '/teachers/' ), 'label' => __( 'Педагогам', 'imidzh' ) ),
-			array( 'url' => home_url( '/news/' ), 'label' => __( 'Новини', 'imidzh' ) ),
-		);
-
-		echo '<ul id="mega-menu" class="mega-menu">';
-		foreach ( $items as $item ) {
-			printf(
-				'<li class="menu-item"><a href="%1$s">%2$s</a></li>',
-				esc_url( $item['url'] ),
-				esc_html( $item['label'] )
-			);
-		}
-		echo '</ul>';
-	}
-}
-
-/**
  * Theme setup.
  */
 function imidzh_setup() {

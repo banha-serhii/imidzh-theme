@@ -1,0 +1,212 @@
+/**
+ * Site search — header (desktop) + drawer (mobile) + results.
+ *
+ * Desktop breakpoint: 1100px (same as mega-menu).
+ * JS matchMedia: assets/js/search.js uses imidzhSearch.desktopMin (1100).
+ *
+ * Stacking: expanded overlay z-index stays well below .mega-menu__panel (1100).
+ * Do not raise this module above the mega-menu.
+ */
+
+/* --------------------------------------------------------------------------
+   Shared form
+   -------------------------------------------------------------------------- */
+.search-form {
+	display: flex;
+	align-items: stretch;
+	gap: 0.35rem;
+	width: 100%;
+}
+
+.search-form__field {
+	flex: 1 1 auto;
+	min-width: 0;
+	min-height: 44px;
+	padding: 0.5rem 0.75rem;
+	border: 1px solid var(--imidzh-border);
+	border-radius: 6px;
+	background: var(--imidzh-surface);
+	color: var(--imidzh-text);
+	font-family: inherit;
+	font-size: max(1rem, 16px);
+	line-height: 1.4;
+}
+
+.search-form__field::placeholder {
+	color: var(--imidzh-muted);
+}
+
+.search-form__submit {
+	flex: 0 0 auto;
+	min-height: 44px;
+	min-width: 44px;
+	padding: 0.5rem 0.9rem;
+	border: 1px solid var(--imidzh-accent);
+	border-radius: 6px;
+	background: var(--imidzh-accent);
+	color: #000;
+	font-family: inherit;
+	font-size: 0.9rem;
+	font-weight: 700;
+	cursor: pointer;
+	white-space: nowrap;
+}
+
+.search-form__submit:hover,
+.search-form__submit:focus-visible {
+	background: var(--imidzh-accent-hover);
+	text-decoration: none;
+}
+
+/* --------------------------------------------------------------------------
+   Desktop header widget (≥ 1100px)
+   -------------------------------------------------------------------------- */
+.site-search--header {
+	position: relative;
+	flex: 0 0 auto;
+	flex-shrink: 0;
+	display: none;
+}
+
+.site-search__toggle {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 44px;
+	height: 44px;
+	min-width: 44px;
+	min-height: 44px;
+	margin: 0;
+	padding: 0;
+	border: 2px solid var(--imidzh-primary);
+	border-radius: 6px;
+	background: transparent;
+	color: var(--imidzh-primary);
+	cursor: pointer;
+}
+
+.site-search__toggle:hover {
+	background: var(--imidzh-bg);
+}
+
+.site-search__icon {
+	display: block;
+}
+
+@media (min-width: 1100px) {
+	.site-header__inner {
+		flex-wrap: nowrap;
+	}
+
+	.site-search--header {
+		display: block;
+	}
+
+	.site-search--drawer {
+		display: none;
+	}
+
+	.site-search--header .search-form {
+		position: absolute;
+		right: calc(100% + 0.4rem);
+		top: 50%;
+		transform: translateY(-50%);
+		width: min(20rem, calc(100vw - 14rem));
+		padding: 0.25rem 0.25rem 0.25rem 0.4rem;
+		background: var(--imidzh-surface);
+		border: 1px solid var(--imidzh-border);
+		border-radius: 8px;
+		box-shadow: var(--imidzh-shadow-md);
+		z-index: 5;
+	}
+
+	.site-search--header .search-form__field {
+		min-height: 40px;
+	}
+
+	.site-search--header .search-form__submit {
+		min-height: 40px;
+	}
+}
+
+/* --------------------------------------------------------------------------
+   Mobile / tablet drawer (< 1100px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 1099px) {
+	.site-search--header {
+		display: none;
+	}
+
+	.site-search--drawer {
+		display: block;
+		padding: 0.85rem 1.25rem 1rem;
+		border-bottom: 1px solid var(--imidzh-border);
+		background: var(--imidzh-surface);
+	}
+
+	.site-search--drawer .search-form__field,
+	.site-search--drawer .search-form__submit {
+		min-height: 44px;
+	}
+}
+
+/* --------------------------------------------------------------------------
+   Results page
+   -------------------------------------------------------------------------- */
+.search-page-form {
+	margin: 0 0 1.75rem;
+	max-width: 36rem;
+}
+
+.search-empty p {
+	margin: 0 0 1rem;
+}
+
+.search-empty__lead {
+	margin: 0 0 0.5rem;
+	font-weight: 600;
+	color: var(--imidzh-primary);
+}
+
+.search-empty__links {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75rem 1.25rem;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.search-empty__links a {
+	color: var(--imidzh-primary);
+	font-weight: 600;
+	text-decoration: underline;
+	text-underline-offset: 0.15em;
+}
+
+/* --------------------------------------------------------------------------
+   High contrast
+   -------------------------------------------------------------------------- */
+body.high-contrast .site-search__toggle {
+	border-color: var(--imidzh-border);
+	color: var(--imidzh-text);
+	background: var(--imidzh-surface);
+}
+
+body.high-contrast .search-form__field,
+body.high-contrast .site-search--header .search-form {
+	border-color: var(--imidzh-border);
+	border-width: 2px;
+	background: var(--imidzh-surface);
+	color: var(--imidzh-text);
+}
+
+body.high-contrast .search-form__submit {
+	border: 2px solid #000;
+	background: var(--imidzh-accent);
+	color: #000;
+}
+
+body.high-contrast .search-empty {
+	border-width: 2px;
+}

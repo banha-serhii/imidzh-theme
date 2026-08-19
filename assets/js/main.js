@@ -6,7 +6,7 @@
 
   var STORAGE_CONTRAST = 'imidzh-a11y-contrast';
   var STORAGE_FONT = 'imidzh-a11y-font';
-  var MQ_DESKTOP = window.matchMedia('(min-width: 769px)');
+  var MQ_DESKTOP = window.matchMedia('(min-width: 1100px)');
   var MQ_HOVER = window.matchMedia('(hover: hover) and (pointer: fine)');
 
   function ready(fn) {

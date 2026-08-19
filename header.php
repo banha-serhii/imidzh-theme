@@ -86,6 +86,12 @@ $header_email = get_theme_mod( 'imidzh_email', 'uzhschool19@ukr.net' );
 
 			<nav id="primary-nav" class="primary-nav" aria-label="<?php esc_attr_e( 'Головна навігація', 'imidzh' ); ?>">
 				<?php
+				get_search_form(
+					array(
+						'imidzh_context' => 'drawer',
+						'aria_label'     => __( 'Пошук по сайту', 'imidzh' ),
+					)
+				);
 				wp_nav_menu(
 					array(
 						'theme_location' => 'primary',
@@ -99,6 +105,15 @@ $header_email = get_theme_mod( 'imidzh_email', 'uzhschool19@ukr.net' );
 				);
 				?>
 			</nav>
+
+			<?php
+			get_search_form(
+				array(
+					'imidzh_context' => 'header',
+					'aria_label'     => __( 'Пошук по сайту', 'imidzh' ),
+				)
+			);
+			?>
 
 		</div>
 	</div>
