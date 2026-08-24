@@ -39,20 +39,19 @@ $header_email = get_theme_mod( 'imidzh_email', 'uzhschool19@ukr.net' );
 				</button>
 			</div>
 		</div>
-		<?php if ( $header_phone || $header_email ) : ?>
-			<div class="a11y-bar__contacts">
-				<?php if ( $header_phone ) : ?>
-					<a class="a11y-bar__contact" href="tel:<?php echo esc_attr( preg_replace( '/[^\d+]/', '', $header_phone ) ); ?>">
-						<?php echo esc_html( $header_phone ); ?>
-					</a>
-				<?php endif; ?>
-				<?php if ( $header_email ) : ?>
-					<a class="a11y-bar__contact" href="mailto:<?php echo esc_attr( $header_email ); ?>">
-						<?php echo esc_html( $header_email ); ?>
-					</a>
-				<?php endif; ?>
-			</div>
-		<?php endif; ?>
+		<div class="a11y-bar__contacts">
+			<?php if ( $header_phone ) : ?>
+				<a class="a11y-bar__contact" href="tel:<?php echo esc_attr( preg_replace( '/[^\d+]/', '', $header_phone ) ); ?>">
+					<?php echo esc_html( $header_phone ); ?>
+				</a>
+			<?php endif; ?>
+			<?php if ( $header_email ) : ?>
+				<a class="a11y-bar__contact" href="mailto:<?php echo esc_attr( $header_email ); ?>">
+					<?php echo esc_html( $header_email ); ?>
+				</a>
+			<?php endif; ?>
+			<?php imidzh_the_social_links( 'a11y' ); ?>
+		</div>
 	</div>
 </div>
 

@@ -39,7 +39,12 @@
 
     function setOpen(open, restoreFocus) {
       root.classList.toggle('is-open', open);
-      form.hidden = !open;
+      form.hidden = false;
+      if (open) {
+        form.removeAttribute('inert');
+      } else {
+        form.setAttribute('inert', '');
+      }
       toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
       if (label) {
         label.textContent = open
@@ -47,11 +52,16 @@
           : (i18n.open || 'Відкрити пошук');
       }
       if (open) {
-        field.focus();
+        window.requestAnimationFrame(function () {
+          field.focus();
+        });
       } else if (restoreFocus) {
         toggle.focus();
       }
     }
+
+    form.hidden = false;
+    form.setAttribute('inert', '');
 
     function close(restoreFocus) {
       if (isOpen()) {
@@ -61,7 +71,13 @@
 
     toggle.addEventListener('click', function () {
       if (!isDesktop()) return;
-      setOpen(!isOpen(), false);
+      var willOpen = !isOpen();
+      setOpen(willOpen, false);
+      if (willOpen) {
+        window.setTimeout(function () {
+          field.focus();
+        }, 0);
+      }
     });
 
     document.addEventListener('keydown', function (e) {

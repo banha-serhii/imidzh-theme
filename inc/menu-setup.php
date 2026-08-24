@@ -541,6 +541,25 @@ function imidzh_ia_after_switch_theme() {
 add_action( 'after_switch_theme', 'imidzh_ia_after_switch_theme' );
 
 /**
+ * Auto-seed for administrators if the theme was already active when IA landed.
+ * Never runs for anonymous front-end visitors.
+ */
+function imidzh_maybe_auto_seed_ia() {
+	if ( get_option( 'imidzh_ia_seeded' ) ) {
+		return;
+	}
+	if ( function_exists( 'wp_installing' ) && wp_installing() ) {
+		return;
+	}
+	if ( ! is_user_logged_in() || ! current_user_can( 'edit_theme_options' ) ) {
+		return;
+	}
+	imidzh_seed_information_architecture();
+}
+add_action( 'admin_init', 'imidzh_maybe_auto_seed_ia', 20 );
+add_action( 'wp', 'imidzh_maybe_auto_seed_ia', 5 );
+
+/**
  * Admin: Appearance → Інформаційна архітектура.
  */
 function imidzh_ia_admin_menu() {
@@ -650,49 +669,78 @@ function imidzh_ia_admin_page() {
 }
 
 /**
- * Fallback primary menu when no menu is assigned (top-level only, no «Головна»).
+ * Canonical permalink for an IA node.
+ *
+ * @param string               $section_slug Parent slug.
+ * @param array<string, mixed> $child        Optional child node.
+ * @return string
+ */
+function imidzh_ia_node_url( $section_slug, $child = null ) {
+	if ( null === $child ) {
+		return home_url( '/' . $section_slug . '/' );
+	}
+	if ( ! empty( $child['root'] ) ) {
+		return home_url( '/' . $child['slug'] . '/' );
+	}
+	return home_url( '/' . $section_slug . '/' . $child['slug'] . '/' );
+}
+
+/**
+ * Fallback primary menu when no menu is assigned.
+ *
+ * Two-level markup matches the walker (button trigger + panel) so hover/keyboard
+ * work before Appearance → Menus is saved. No «Головна».
  */
 if ( ! function_exists( 'imidzh_fallback_menu' ) ) {
 	function imidzh_fallback_menu() {
-		$items = array(
-			array(
-				'url'   => home_url( '/about/' ),
-				'label' => __( 'Про ліцей', 'imidzh' ),
-			),
-			array(
-				'url'   => home_url( '/transparency/' ),
-				'label' => __( 'Прозорість та звітність', 'imidzh' ),
-			),
-			array(
-				'url'   => home_url( '/education/' ),
-				'label' => __( 'Освітній процес', 'imidzh' ),
-			),
-			array(
-				'url'   => home_url( '/parents/' ),
-				'label' => __( 'Вступникам та батькам', 'imidzh' ),
-			),
-			array(
-				'url'   => home_url( '/safety/' ),
-				'label' => __( 'Безпека та захист', 'imidzh' ),
-			),
-			array(
-				'url'   => home_url( '/teachers/' ),
-				'label' => __( 'Педагогам', 'imidzh' ),
-			),
-			array(
-				'url'   => home_url( '/news/' ),
-				'label' => __( 'Новини', 'imidzh' ),
-			),
-		);
-
 		echo '<ul id="mega-menu" class="mega-menu">';
-		foreach ( $items as $item ) {
+
+		foreach ( imidzh_get_information_architecture() as $section ) {
+			$children = isset( $section['children'] ) ? $section['children'] : array();
+			$parent_url = imidzh_ia_node_url( $section['slug'] );
+
+			if ( empty( $children ) ) {
+				printf(
+					'<li class="menu-item"><a href="%1$s">%2$s</a></li>',
+					esc_url( $parent_url ),
+					esc_html( $section['title'] )
+				);
+				continue;
+			}
+
+			$slug      = sanitize_html_class( $section['slug'] );
+			$panel_id  = 'mega-panel-' . $slug;
+			$li_class  = 'menu-item menu-item-has-children';
+			$panel_cls = 'mega-menu__panel mega-menu__panel--simple';
+			if ( ! empty( $section['wide'] ) ) {
+				$li_class  .= ' mega-menu--wide';
+				$panel_cls .= ' mega-menu__panel--wide';
+			}
+
+			printf( '<li class="%s">', esc_attr( $li_class ) );
 			printf(
-				'<li class="menu-item"><a href="%1$s">%2$s</a></li>',
-				esc_url( $item['url'] ),
-				esc_html( $item['label'] )
+				'<button type="button" class="mega-menu__trigger" aria-expanded="false" aria-haspopup="true" aria-controls="%1$s" id="mega-trigger-%2$s"><span>%3$s</span><span class="mega-menu__chevron" aria-hidden="true"></span></button>',
+				esc_attr( $panel_id ),
+				esc_attr( $slug ),
+				esc_html( $section['title'] )
 			);
+			printf(
+				'<div id="%1$s" class="%2$s" role="region"><ul class="mega-menu__list" role="list">',
+				esc_attr( $panel_id ),
+				esc_attr( $panel_cls )
+			);
+
+			foreach ( $children as $child ) {
+				printf(
+					'<li class="menu-item"><a href="%1$s">%2$s</a></li>',
+					esc_url( imidzh_ia_node_url( $section['slug'], $child ) ),
+					esc_html( $child['title'] )
+				);
+			}
+
+			echo '</ul></div></li>';
 		}
+
 		echo '</ul>';
 	}
 }

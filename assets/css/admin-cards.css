@@ -1,0 +1,201 @@
+/* ==========================================================================
+   Admin & Team Cards Fallback / Styling
+   ========================================================================== */
+
+.admin-team-section {
+	--wp--preset--color--primary: var(--imidzh-primary, #24345d);
+	--wp--preset--color--accent: var(--imidzh-accent, #ffcc00);
+	--wp--preset--color--base: var(--imidzh-surface, #ffffff);
+	--wp--preset--spacing--30: 1.25rem;
+	--wp--preset--spacing--40: 1.75rem;
+	--wp--preset--spacing--50: 2.5rem;
+	width: 100%;
+	max-width: 100%;
+}
+
+.admin-team-section.has-base-background-color,
+.admin-card.has-base-background-color {
+	background-color: var(--imidzh-surface, #ffffff);
+}
+
+.admin-team-section .has-primary-color {
+	color: var(--imidzh-primary, #24345d);
+}
+
+/* Yellow accent fails WCAG on white; keep the badge readable and branded. */
+.admin-card__badge,
+.admin-card__badge.has-accent-color {
+	color: var(--imidzh-primary, #24345d) !important;
+	letter-spacing: 0.06em;
+	margin-bottom: 0.25rem;
+}
+
+.admin-grid-row {
+	align-items: stretch;
+}
+
+.admin-card {
+	display: flex !important;
+	flex-direction: column;
+	height: 100%;
+	box-shadow: var(--imidzh-shadow-sm, 0 1px 3px rgba(0, 0, 0, 0.1));
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.admin-card.shadow-sm {
+	box-shadow: var(--imidzh-shadow-sm, 0 1px 3px rgba(0, 0, 0, 0.1));
+}
+
+.admin-card:hover {
+	transform: translateY(-2px);
+	box-shadow: var(--imidzh-shadow-md, 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06));
+}
+
+.admin-card p {
+	margin-top: 0;
+	margin-bottom: 0.5rem;
+}
+
+.admin-card p:last-child {
+	margin-bottom: 0;
+}
+
+.admin-card__name {
+	font-family: var(--imidzh-font-display, Georgia, "Times New Roman", serif);
+	color: var(--imidzh-primary, #24345d);
+	line-height: 1.25;
+	overflow-wrap: anywhere;
+}
+
+.admin-card__role {
+	color: var(--imidzh-primary, #24345d);
+}
+
+.admin-card__education {
+	color: var(--imidzh-muted, #64748b);
+}
+
+/* Card Avatar */
+.admin-card__avatar {
+	margin: 0 0 1rem 0 !important;
+	width: 100%;
+}
+
+.admin-card__avatar img {
+	width: 100%;
+	height: auto;
+	display: block;
+}
+
+.admin-card__inner {
+	flex: 1 1 auto;
+	width: 100%;
+	margin: 0;
+}
+
+.admin-card--director .admin-card__body-col {
+	display: flex;
+	flex-direction: column;
+}
+
+/* Quote styling & auto-push to card bottom */
+.admin-card__quote {
+	margin-top: auto !important;
+	margin-bottom: 0 !important;
+	border-left: 3px solid var(--wp--preset--color--primary, #24345d) !important;
+	border-right: 0 !important;
+	padding: 0.5rem 0.75rem !important;
+	font-style: italic;
+	color: var(--imidzh-text, #1e293b);
+}
+
+.admin-card__quote p {
+	margin: 0;
+}
+
+.admin-card__quote cite {
+	display: inline;
+	font-style: normal;
+	font-weight: 600;
+	color: var(--imidzh-muted, #64748b);
+}
+
+/* Hide leftover empty optional fields so spacing stays even */
+.admin-card__badge:empty,
+.admin-card__role:empty,
+.admin-card__education:empty,
+.admin-card__avatar:not(:has(img[src]:not([src=""]))),
+.admin-card__quote:not(:has(p:not(:empty))) {
+	display: none !important;
+	margin: 0 !important;
+}
+
+/* Fallback: Director card when media column is removed or empty */
+.admin-card--director .admin-card__media-col:not(:has(.admin-card__avatar)),
+.admin-card--director .admin-card__media-col:not(:has(img[src]:not([src=""]))) {
+	display: none;
+}
+
+.admin-card--director .admin-card__inner:not(:has(.admin-card__avatar)) .admin-card__body-col,
+.admin-card--director .admin-card__inner:not(:has(img[src]:not([src=""]))) .admin-card__body-col {
+	flex-basis: 100% !important;
+	max-width: 100%;
+	padding-left: 0 !important;
+}
+
+/* Fallback: Standard card when only name/role exist */
+.admin-card:not(:has(.admin-card__avatar)),
+.admin-card:not(:has(img[src]:not([src=""]))) {
+	justify-content: center;
+}
+
+.admin-card__name:first-child {
+	margin-top: 0 !important;
+}
+
+.admin-card > .admin-card__name:first-child,
+.admin-card > .wp-block-heading.admin-card__name:first-child {
+	margin-top: 0 !important;
+}
+
+/* Mobile-first: stacked director layout, then side-by-side on desktop columns */
+.admin-card--director .admin-card__body-col {
+	padding-left: 0 !important;
+}
+
+.admin-card--director .admin-card__avatar {
+	margin-bottom: 1rem !important;
+}
+
+@media (min-width: 782px) {
+	.admin-card--director .admin-card__body-col {
+		padding-left: var(--wp--preset--spacing--30, 1.25rem) !important;
+	}
+
+	.admin-card--director .admin-card__inner:not(:has(.admin-card__avatar)) .admin-card__body-col,
+	.admin-card--director .admin-card__inner:not(:has(img[src]:not([src=""]))) .admin-card__body-col {
+		padding-left: 0 !important;
+	}
+
+	.admin-card--director .admin-card__avatar {
+		margin-bottom: 0 !important;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.admin-card,
+	.admin-card:hover {
+		transition: none;
+		transform: none;
+	}
+}
+
+body.high-contrast .admin-card {
+	border-color: #000 !important;
+	border-width: 2px !important;
+	box-shadow: none;
+}
+
+body.high-contrast .admin-card__quote {
+	border-left-color: #000 !important;
+}

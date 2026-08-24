@@ -60,9 +60,11 @@
 
 /* --------------------------------------------------------------------------
    Desktop header widget (≥ 1100px)
+   Icon stays in the nav row. The field drops BELOW the header so it never
+   covers menu labels. Positioned against .site-header__inner (already relative).
+   z-index stays below .mega-menu__panel (1100).
    -------------------------------------------------------------------------- */
 .site-search--header {
-	position: relative;
 	flex: 0 0 auto;
 	flex-shrink: 0;
 	display: none;
@@ -83,6 +85,7 @@
 	background: transparent;
 	color: var(--imidzh-primary);
 	cursor: pointer;
+	transition: background-color var(--imidzh-transition), color var(--imidzh-transition), border-color var(--imidzh-transition);
 }
 
 .site-search__toggle:hover {
@@ -94,38 +97,79 @@
 }
 
 @media (min-width: 1100px) {
+	.site-header {
+		overflow: visible;
+	}
+
 	.site-header__inner {
 		flex-wrap: nowrap;
+		overflow: visible;
 	}
 
 	.site-search--header {
 		display: block;
+		position: static;
 	}
 
 	.site-search--drawer {
 		display: none;
 	}
 
+	.site-search--header.is-open .site-search__toggle {
+		background: var(--imidzh-primary);
+		border-color: var(--imidzh-primary);
+		color: var(--imidzh-accent);
+	}
+
 	.site-search--header .search-form {
 		position: absolute;
-		right: calc(100% + 0.4rem);
-		top: 50%;
-		transform: translateY(-50%);
-		width: min(20rem, calc(100vw - 14rem));
-		padding: 0.25rem 0.25rem 0.25rem 0.4rem;
+		top: calc(100% + 0.65rem);
+		right: 0;
+		left: auto;
+		width: min(22.5rem, 100%);
+		padding: 0.6rem;
 		background: var(--imidzh-surface);
 		border: 1px solid var(--imidzh-border);
 		border-radius: 8px;
 		box-shadow: var(--imidzh-shadow-md);
 		z-index: 5;
+		opacity: 0;
+		visibility: hidden;
+		pointer-events: none;
+		transform: translateY(-0.4rem);
+		transition: opacity var(--imidzh-transition), visibility var(--imidzh-transition), transform var(--imidzh-transition);
+	}
+
+	.site-search--header .search-form[hidden] {
+		display: flex;
+	}
+
+	.site-search--header.is-open .search-form {
+		opacity: 1;
+		visibility: visible;
+		pointer-events: auto;
+		transform: translateY(0);
+	}
+
+	.site-search--header .search-form::before {
+		content: "";
+		position: absolute;
+		top: -7px;
+		right: 14px;
+		width: 12px;
+		height: 12px;
+		background: var(--imidzh-surface);
+		border-left: 1px solid var(--imidzh-border);
+		border-top: 1px solid var(--imidzh-border);
+		transform: rotate(45deg);
 	}
 
 	.site-search--header .search-form__field {
-		min-height: 40px;
+		min-height: 44px;
 	}
 
 	.site-search--header .search-form__submit {
-		min-height: 40px;
+		min-height: 44px;
 	}
 }
 
@@ -207,6 +251,13 @@ body.high-contrast .search-form__submit {
 	color: #000;
 }
 
-body.high-contrast .search-empty {
-	border-width: 2px;
+body.high-contrast .site-search--header.is-open .site-search__toggle {
+	background: #000;
+	border-color: #000;
+	color: #ffff00;
+}
+
+body.high-contrast .site-search--header .search-form::before {
+	background: var(--imidzh-surface);
+	border-color: var(--imidzh-border);
 }

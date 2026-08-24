@@ -12,23 +12,25 @@ get_header();
 	<div class="container">
 		<div class="page-layout">
 
-			<aside class="sidebar" aria-label="<?php esc_attr_e( 'Бічне меню', 'imidzh' ); ?>">
-				<?php if ( has_nav_menu( 'sidebar' ) ) : ?>
-					<h2 class="sidebar__title"><?php esc_html_e( 'Розділ', 'imidzh' ); ?></h2>
-					<?php
-					wp_nav_menu(
-						array(
-							'theme_location' => 'sidebar',
-							'menu_class'     => 'sidebar-menu',
-							'container'      => false,
-							'depth'          => 2,
-						)
-					);
-					?>
-				<?php elseif ( is_active_sidebar( 'sidebar-1' ) ) : ?>
-					<?php dynamic_sidebar( 'sidebar-1' ); ?>
-				<?php endif; ?>
-			</aside>
+			<?php if ( has_nav_menu( 'sidebar' ) || is_active_sidebar( 'sidebar-1' ) ) : ?>
+				<aside class="sidebar" aria-label="<?php esc_attr_e( 'Бічне меню', 'imidzh' ); ?>">
+					<?php if ( has_nav_menu( 'sidebar' ) ) : ?>
+						<h2 class="sidebar__title"><?php esc_html_e( 'Розділ', 'imidzh' ); ?></h2>
+						<?php
+						wp_nav_menu(
+							array(
+								'theme_location' => 'sidebar',
+								'menu_class'     => 'sidebar-menu',
+								'container'      => false,
+								'depth'          => 2,
+							)
+						);
+						?>
+					<?php elseif ( is_active_sidebar( 'sidebar-1' ) ) : ?>
+						<?php dynamic_sidebar( 'sidebar-1' ); ?>
+					<?php endif; ?>
+				</aside>
+			<?php endif; ?>
 
 			<?php
 			while ( have_posts() ) :

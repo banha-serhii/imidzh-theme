@@ -233,6 +233,73 @@ button {
 	text-underline-offset: 0.15em;
 }
 
+.social-links {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.social-links__item {
+	margin: 0;
+}
+
+.social-links__link {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.35rem;
+	min-width: 36px;
+	min-height: 36px;
+	padding: 0.35rem;
+	border-radius: 8px;
+	border: 1px solid rgba(255, 255, 255, 0.28);
+	color: #fff;
+	text-decoration: none;
+	transition: background-color var(--imidzh-transition), color var(--imidzh-transition), border-color var(--imidzh-transition);
+}
+
+.social-links__link:hover,
+.social-links__link:focus-visible {
+	background: var(--imidzh-accent);
+	border-color: var(--imidzh-accent);
+	color: #000;
+	text-decoration: none;
+}
+
+.social-links__icon {
+	display: block;
+	flex-shrink: 0;
+}
+
+.social-links--a11y .social-links__label {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+
+.social-links--footer {
+	margin-top: 1rem;
+	gap: 0.65rem;
+	flex-wrap: wrap;
+}
+
+.social-links--footer .social-links__link {
+	padding: 0.45rem 0.75rem;
+	min-width: 44px;
+	min-height: 44px;
+	font-size: 0.85rem;
+	font-weight: 600;
+}
+
 .a11y-bar__controls {
 	display: flex;
 	gap: 0.5rem;
@@ -354,6 +421,7 @@ button {
 	line-height: 1.35;
 	color: var(--imidzh-muted);
 	display: block;
+	max-width: 200px;
 }
 
 .menu-toggle {
@@ -953,7 +1021,7 @@ button {
    ========================================== */
 .page-layout {
 	display: grid;
-	grid-template-columns: 280px 1fr;
+	grid-template-columns: 1fr 280px;
 	gap: 2rem;
 	align-items: start;
 }
@@ -965,6 +1033,15 @@ button {
 	border: 1px solid var(--imidzh-border);
 	position: sticky;
 	top: calc(var(--imidzh-header-h) + 1rem);
+	/* Маркування в `page.php` має sidebar першим, тому явно ставимо його в праву колонку. */
+	grid-column: 2;
+}
+
+/* Контент сторінки завжди має бути в лівій колонці. */
+.page-layout > article,
+.page-layout > .content-panel,
+.page-layout > .content-panel--wide {
+	grid-column: 1;
 }
 
 .sidebar__title {
@@ -1014,6 +1091,11 @@ button {
 
 .entry-content p {
 	margin: 0 0 1rem;
+}
+
+.content-panel--wide {
+	max-width: min(100%, 920px);
+	margin-inline: auto;
 }
 
 /* ==========================================
@@ -1139,6 +1221,7 @@ button {
 
 	.sidebar {
 		position: static;
+		grid-column: auto;
 	}
 }
 

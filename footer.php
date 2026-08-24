@@ -30,6 +30,7 @@ $address = get_theme_mod( 'imidzh_address', 'м. Ужгород, Закарпа�
 					);
 					?>
 				</p>
+				<?php imidzh_the_social_links( 'footer' ); ?>
 			</div>
 
 			<div class="footer-col">

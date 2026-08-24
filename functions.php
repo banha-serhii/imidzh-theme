@@ -24,6 +24,15 @@ if ( file_exists( IMIDZH_DIR . '/inc/search.php' ) ) {
 if ( file_exists( IMIDZH_DIR . '/inc/yoast-seo.php' ) ) {
 	require_once IMIDZH_DIR . '/inc/yoast-seo.php';
 }
+if ( file_exists( IMIDZH_DIR . '/inc/block-patterns.php' ) ) {
+	require_once IMIDZH_DIR . '/inc/block-patterns.php';
+}
+if ( file_exists( IMIDZH_DIR . '/inc/pdf-embeds.php' ) ) {
+	require_once IMIDZH_DIR . '/inc/pdf-embeds.php';
+}
+if ( file_exists( IMIDZH_DIR . '/inc/social-links.php' ) ) {
+	require_once IMIDZH_DIR . '/inc/social-links.php';
+}
 
 /**
  * Theme setup.
