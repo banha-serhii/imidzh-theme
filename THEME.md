@@ -176,3 +176,9 @@ Fallback (`imidzh_fallback_menu()` у `inc/menu-setup.php`) виводить т�
 - `prefers-reduced-motion`
 - Тригери mega: `button` + `aria-expanded` / `aria-controls` / `aria-haspopup`
 - Мінімальна зона кліку ~44px
+
+## Деплой (shared hosting)
+
+Локальні CSS/JS лишаються читабельними. Продакшн-пакет: `npm run build` → `dist/imidzh-theme/`. Upload: `npm run deploy` (SFTP/FTPS, секрети в `.env`).
+
+Повна інструкція, ключі `.env` і rollback: [docs/DEPLOY.md](docs/DEPLOY.md).

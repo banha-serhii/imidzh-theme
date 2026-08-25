@@ -120,15 +120,29 @@ function imidzh_yoast_website_search_action( $data ) {
 add_filter( 'wpseo_schema_website', 'imidzh_yoast_website_search_action' );
 
 /**
- * Helpful internal links for empty / zero search results.
+ * Recommended internal pages for wayfinding (search empty state, 404).
  *
+ * @param string $context 'search' | '404'.
  * @return array<int, array{url: string, label: string}>
  */
-function imidzh_get_search_helpful_links() {
-	$candidates = array(
-		'transparency' => __( 'Прозорість', 'imidzh' ),
-		'news'         => __( 'Новини', 'imidzh' ),
-	);
+function imidzh_get_recommended_links( $context = 'search' ) {
+	if ( '404' === $context ) {
+		$candidates = array(
+			'about'        => __( 'Про ліцей', 'imidzh' ),
+			'news'         => __( 'Новини', 'imidzh' ),
+			'education'    => __( 'Освітній процес', 'imidzh' ),
+			'parents'      => __( 'Вступникам та батькам', 'imidzh' ),
+			'transparency' => __( 'Прозорість та звітність', 'imidzh' ),
+			'safety'       => __( 'Безпека та захист', 'imidzh' ),
+			'contacts'     => __( 'Контакти', 'imidzh' ),
+		);
+	} else {
+		$candidates = array(
+			'transparency' => __( 'Прозорість', 'imidzh' ),
+			'news'         => __( 'Новини', 'imidzh' ),
+			'contacts'     => __( 'Контакти', 'imidzh' ),
+		);
+	}
 
 	$links = array();
 
@@ -148,15 +162,31 @@ function imidzh_get_search_helpful_links() {
 }
 
 /**
- * Print helpful links under empty / zero search results.
+ * Helpful internal links for empty / zero search results.
+ *
+ * @return array<int, array{url: string, label: string}>
  */
-function imidzh_the_search_helpful_links() {
-	$links = imidzh_get_search_helpful_links();
+function imidzh_get_search_helpful_links() {
+	return imidzh_get_recommended_links( 'search' );
+}
+
+/**
+ * Print a recommended-links list.
+ *
+ * @param string $context 'search' | '404'.
+ * @param string $lead    Optional lead text.
+ */
+function imidzh_the_recommended_links( $context = 'search', $lead = '' ) {
+	$links = imidzh_get_recommended_links( $context );
 	if ( empty( $links ) ) {
 		return;
 	}
+
+	if ( '' === $lead ) {
+		$lead = __( 'Корисні розділи:', 'imidzh' );
+	}
 	?>
-	<p class="search-empty__lead"><?php esc_html_e( 'Корисні розділи:', 'imidzh' ); ?></p>
+	<p class="search-empty__lead"><?php echo esc_html( $lead ); ?></p>
 	<ul class="search-empty__links">
 		<?php foreach ( $links as $link ) : ?>
 			<li>
@@ -165,4 +195,11 @@ function imidzh_the_search_helpful_links() {
 		<?php endforeach; ?>
 	</ul>
 	<?php
+}
+
+/**
+ * Print helpful links under empty / zero search results.
+ */
+function imidzh_the_search_helpful_links() {
+	imidzh_the_recommended_links( 'search' );
 }

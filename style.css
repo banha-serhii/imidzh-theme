@@ -813,6 +813,106 @@ button {
 	transform: translateY(-2px);
 }
 
+.btn--primary-outline {
+	border-color: var(--imidzh-primary);
+	color: var(--imidzh-primary);
+	background: transparent;
+}
+
+.btn--primary-outline:hover,
+.btn--primary-outline:focus-visible {
+	background-color: var(--imidzh-primary);
+	color: #fff;
+	transform: translateY(-2px);
+}
+
+/* ==========================================
+   404 ERROR PAGE
+   ========================================== */
+.error-404__panel {
+	text-align: center;
+	padding: 2.5rem 1.75rem 2.75rem;
+}
+
+.error-404__code {
+	margin: 0 0 0.35rem;
+	font-family: var(--imidzh-font);
+	font-size: clamp(3.5rem, 10vw, 5.5rem);
+	font-weight: 800;
+	line-height: 1;
+	letter-spacing: 0.04em;
+	color: var(--imidzh-accent);
+}
+
+.error-404__header {
+	margin-bottom: 1rem;
+}
+
+.error-404__title {
+	margin: 0;
+}
+
+.error-404__content > p {
+	margin: 0 auto 1rem;
+	max-width: 38rem;
+	color: var(--imidzh-text);
+}
+
+.error-404__path {
+	font-size: 0.9rem;
+	color: var(--imidzh-muted);
+	word-break: break-word;
+}
+
+.error-404__actions {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 0.75rem;
+	margin: 1.75rem 0 2rem;
+}
+
+.error-404__search {
+	margin: 0 auto 2rem;
+	max-width: 28rem;
+	text-align: left;
+}
+
+.error-404__subtitle {
+	margin: 0 0 0.75rem;
+	font-size: 1.05rem;
+	font-weight: 700;
+	color: var(--imidzh-primary);
+	text-align: center;
+}
+
+.error-404__links {
+	text-align: left;
+	max-width: 40rem;
+	margin: 0 auto;
+	padding-top: 1.25rem;
+	border-top: 1px solid var(--imidzh-border);
+}
+
+.error-404__links .search-empty__links {
+	justify-content: center;
+}
+
+.error-404__links .search-empty__lead {
+	text-align: center;
+}
+
+@media (max-width: 600px) {
+	.error-404__actions {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.error-404__actions .btn {
+		width: 100%;
+	}
+}
+
 .hero__card {
 	background: rgba(255, 255, 255, 0.08);
 	backdrop-filter: blur(8px);
