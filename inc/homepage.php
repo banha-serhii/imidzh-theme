@@ -264,10 +264,10 @@ function imidzh_get_home_quick_links() {
 			'path'  => 'news',
 		),
 		array(
-			'slug'  => 'admission',
+			'slug'  => 'parents',
 			'title' => __( 'Вступникам', 'imidzh' ),
-			'text'  => __( 'Правила прийому та документи', 'imidzh' ),
-			'path'  => 'parents/admission',
+			'text'  => __( 'Правила прийому та документи для батьків', 'imidzh' ),
+			'path'  => 'parents',
 		),
 		array(
 			'slug'  => 'transparency',

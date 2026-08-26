@@ -102,3 +102,34 @@
     background-color: #f1f5f9;
     font-weight: 600;
   }
+
+/* Restore lists in post content (theme reset removes list-style). */
+.entry-content ul,
+.wp-block-post-content ul,
+.editor-styles-wrapper ul,
+.wp-block-list {
+  list-style: disc;
+  padding-left: 1.35rem;
+  margin: 0 0 1.25rem;
+}
+
+.entry-content ol,
+.wp-block-post-content ol,
+.editor-styles-wrapper ol {
+  list-style: decimal;
+  padding-left: 1.35rem;
+  margin: 0 0 1.25rem;
+}
+
+.entry-content li,
+.wp-block-list li {
+  margin: 0 0 0.4rem;
+}
+
+.hub-callout {
+  border: 2px solid var(--imidzh-accent, #ffcc00);
+  background: #fffbeb;
+  border-radius: 12px;
+  padding: 1.15rem 1.35rem;
+  margin: 0 0 1.5rem;
+}

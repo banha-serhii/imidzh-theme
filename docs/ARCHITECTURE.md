@@ -15,6 +15,7 @@ WordPress classic theme for a public education institution with strong accessibi
 - `inc/search.php` - header search integration, assets, search behavior.
 - `inc/fonts.php` - self-hosted font loading and Google Fonts deactivation.
 - `inc/yoast-seo.php` - Yoast-safe schema and SEO defaults.
+- `inc/hub-pages.php` - parent hub template assignment, intro seed, child grid (`page-hub.php`).
 
 ## URL and Slug Policy
 - Use English canonical slugs for public URLs (for consistency and SEO).

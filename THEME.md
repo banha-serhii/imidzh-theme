@@ -12,12 +12,16 @@ imidzh-theme/
 ├── footer.php                         # Колонки, контакти, wp_footer
 ├── front-page.php                     # Hero slider / fallback, новини, переваги
 ├── page.php                           # Sidebar + контент
+├── page-hub.php                       # Хаб розділу: Gutenberg + сітка дітей
 ├── index.php                          # Архів / блог
 ├── THEME.md
 ├── assets/css/mega-menu.css           # Щільність навігації + collapse 1100px + mega-menu--wide
+├── assets/css/hub.css                 # Сітка хаба та CTA патернів
 ├── assets/js/main.js                  # A11y + mega-menu keyboard / mobile (MQ_DESKTOP = 1100px)
 ├── inc/class-mega-menu-walker.php     # Walker_Nav_Menu для mega-menu
 ├── inc/menu-setup.php                 # IA, seeding, fallback, enqueue mega-menu.css
+├── inc/hub-pages.php                  # Шаблон хабів, стартовий контент, сітка дітей
+├── patterns/hub-*.php                 # Gutenberg-патерни вступів хабів
 └── template-parts/content-news-card.php
 ```
 
@@ -118,10 +122,22 @@ Re-seed **перезбирає пункти меню** «Головне меню
 
 Бічне меню (`sidebar`) тема не заповнює — `page.php` уже використовує його як навігацію розділу.
 
-Щоб скинути прапорець вручну (WP-CLI):
+## Hub pages / patterns
+
+Батьківські сторінки розділів (`/about/`, `/transparency/`, `/education/`, `/parents/`, `/safety/`, `/teachers/`, `/contacts/`) використовують шаблон **«Хаб розділу»** (`page-hub.php`): Gutenberg-вступ, потім динамічна сітка опублікованих дочірніх сторінок. На хабі «Про ліцей» у сітку додаються **Контакти** (`/contacts/`). `/news/` — архів записів, не хаб.
+
+Стартовий текст — патерни `patterns/hub-*.php`, категорія редактора **Хаби розділів**. Застосування:
+
+1. Автоматично після активації теми або один раз в адмінці, якщо на хабі ще плейсхолдер / порожньо (`imidzh_hubs_content_version`).
+2. **Зовнішній вигляд → Інформаційна архітектура → Оновити контент хабів** (`edit_theme_options`). Повторний запуск не затирає сторінки, які вже змінювали в редакторі.
+
+Редактор: вставити або замінити вступ — **Патерни → Хаби розділів**. PDF та файли документів додавайте на дочірніх сторінках.
+
+Щоб скинути прапорці вручну (WP-CLI):
 
 ```bash
 wp option delete imidzh_ia_seeded
+wp option delete imidzh_hubs_content_version
 ```
 
 ## Mega-Menu: як зібрати в Appearance → Menus

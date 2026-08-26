@@ -25,6 +25,15 @@ function imidzh_register_block_pattern_categories() {
 			)
 		);
 	}
+
+	if ( ! $registry->is_registered( 'imidzh-hubs' ) ) {
+		register_block_pattern_category(
+			'imidzh-hubs',
+			array(
+				'label' => __( 'Хаби розділів', 'imidzh' ),
+			)
+		);
+	}
 }
 add_action( 'init', 'imidzh_register_block_pattern_categories' );
 

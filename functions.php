@@ -7,7 +7,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'IMIDZH_VERSION', '1.2.0' );
+define( 'IMIDZH_VERSION', '1.1.2' );
 define( 'IMIDZH_DIR', get_template_directory() );
 define( 'IMIDZH_URI', get_template_directory_uri() );
 
@@ -35,6 +35,9 @@ if ( file_exists( IMIDZH_DIR . '/inc/social-links.php' ) ) {
 }
 if ( file_exists( IMIDZH_DIR . '/inc/homepage.php' ) ) {
 	require_once IMIDZH_DIR . '/inc/homepage.php';
+}
+if ( file_exists( IMIDZH_DIR . '/inc/hub-pages.php' ) ) {
+	require_once IMIDZH_DIR . '/inc/hub-pages.php';
 }
 
 /**

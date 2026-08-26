@@ -664,6 +664,8 @@ function imidzh_ia_admin_page() {
 			);
 			?>
 		</form>
+
+		<?php do_action( 'imidzh_ia_admin_page_after' ); ?>
 	</div>
 	<?php
 }
