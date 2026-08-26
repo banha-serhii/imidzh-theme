@@ -4,7 +4,7 @@ Theme URI: https://imidzh.uz.ua/
 Author: Ужгородський ліцей «Імідж»
 Author URI: https://serhii-banha-cv.vercel.app/
 Description: Доступна (WCAG 2.1 AA), SEO-орієнтована тема для освітнього закладу з mega-menu, панеллю доступності та зоною hero-slider shortcode.
-Version: 1.1.0
+Version: 1.2.0
 Requires at least: 6.0
 Tested up to: 6.7
 Requires PHP: 7.4
@@ -1116,9 +1116,303 @@ button {
 	color: var(--imidzh-muted);
 }
 
+.feature-item--link {
+	display: block;
+	text-decoration: none;
+	color: inherit;
+	border: 1px solid transparent;
+	transition: border-color var(--imidzh-transition), box-shadow var(--imidzh-transition), transform var(--imidzh-transition);
+}
+
+.feature-item--link:hover,
+.feature-item--link:focus-visible {
+	text-decoration: none;
+	border-color: var(--imidzh-border);
+	box-shadow: var(--imidzh-shadow-sm);
+	transform: translateY(-3px);
+}
+
+.feature-item__more {
+	display: inline-block;
+	margin-top: 0.85rem;
+	font-size: 0.85rem;
+	font-weight: 700;
+	color: var(--imidzh-primary);
+}
+
 /* ==========================================
-   7. INNER PAGE LAYOUT
+   6b. FRONT PAGE SECTIONS
    ========================================== */
+.main-content--front {
+	padding: 0;
+}
+
+.main-content--front > .home-news,
+.main-content--front > .home-quick,
+.main-content--front > .home-gallery,
+.main-content--front > .home-transparency,
+.main-content--front > .home-contacts {
+	padding: 3.25rem 0;
+}
+
+.hero--has-photo {
+	background-image:
+		linear-gradient(135deg, rgba(36, 52, 93, 0.92) 0%, rgba(49, 70, 111, 0.88) 100%),
+		var(--imidzh-hero-photo);
+	background-size: cover;
+	background-position: center;
+}
+
+.home-quick__grid {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 1rem;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.home-quick__card {
+	display: flex;
+	flex-direction: column;
+	gap: 0.35rem;
+	min-height: 7.5rem;
+	padding: 1.25rem 1.35rem;
+	border-radius: var(--imidzh-radius);
+	background: var(--imidzh-surface);
+	border: 1px solid var(--imidzh-border);
+	border-top: 4px solid var(--imidzh-accent);
+	text-decoration: none;
+	color: inherit;
+	box-shadow: var(--imidzh-shadow-sm);
+	transition: transform var(--imidzh-transition), box-shadow var(--imidzh-transition), border-color var(--imidzh-transition);
+}
+
+.home-quick__card:hover,
+.home-quick__card:focus-visible {
+	text-decoration: none;
+	transform: translateY(-3px);
+	box-shadow: var(--imidzh-shadow-md);
+	border-color: var(--imidzh-primary);
+}
+
+.home-quick__title {
+	font-size: 1.1rem;
+	font-weight: 800;
+	color: var(--imidzh-primary);
+}
+
+.home-quick__text {
+	font-size: 0.9rem;
+	color: var(--imidzh-muted);
+	line-height: 1.45;
+}
+
+.home-empty {
+	grid-column: 1 / -1;
+	text-align: center;
+	padding: 2rem;
+}
+
+.home-empty .btn {
+	margin-top: 0.75rem;
+}
+
+.home-gallery {
+	background: var(--imidzh-surface);
+	border-top: 1px solid var(--imidzh-border);
+	border-bottom: 1px solid var(--imidzh-border);
+}
+
+.home-gallery__grid {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 1rem;
+}
+
+.home-gallery__item {
+	margin: 0;
+	border-radius: var(--imidzh-radius);
+	overflow: hidden;
+	aspect-ratio: 16 / 10;
+	background: var(--imidzh-border);
+}
+
+.home-gallery__item img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.features-section {
+	margin-top: 0;
+}
+
+.home-transparency__lead {
+	margin: -0.5rem 0 1.5rem;
+	color: var(--imidzh-muted);
+	max-width: 40rem;
+}
+
+.home-transparency__grid {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: 0.85rem;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.home-transparency__card {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 4.5rem;
+	padding: 1rem;
+	text-align: center;
+	font-weight: 700;
+	color: var(--imidzh-primary);
+	background: var(--imidzh-surface);
+	border: 1px solid var(--imidzh-border);
+	border-radius: var(--imidzh-radius);
+	text-decoration: none;
+	transition: background-color var(--imidzh-transition), color var(--imidzh-transition), border-color var(--imidzh-transition);
+}
+
+.home-transparency__card:hover,
+.home-transparency__card:focus-visible {
+	background: var(--imidzh-primary);
+	border-color: var(--imidzh-primary);
+	color: #fff;
+	text-decoration: none;
+}
+
+.home-contacts {
+	background: var(--imidzh-bg);
+	border-top: 1px solid var(--imidzh-border);
+}
+
+.home-contacts__grid {
+	display: grid;
+	grid-template-columns: 1fr 1.15fr;
+	gap: 1.5rem;
+	align-items: stretch;
+}
+
+.home-contacts__list {
+	list-style: none;
+	margin: 0 0 1.5rem;
+	padding: 0;
+	display: grid;
+	gap: 1rem;
+}
+
+.home-contacts__label {
+	display: block;
+	font-size: 0.75rem;
+	font-weight: 800;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+	color: var(--imidzh-muted);
+	margin-bottom: 0.2rem;
+}
+
+.home-contacts__value {
+	font-size: 1.05rem;
+	font-weight: 600;
+	color: var(--imidzh-primary);
+	text-decoration: none;
+}
+
+a.home-contacts__value:hover,
+a.home-contacts__value:focus-visible {
+	color: var(--imidzh-accent-hover);
+	text-decoration: underline;
+}
+
+.home-contacts__actions {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 1rem;
+}
+
+.home-contacts .social-links__link {
+	color: var(--imidzh-primary);
+	border-color: var(--imidzh-border);
+	background: var(--imidzh-bg);
+}
+
+.home-contacts .social-links__link:hover,
+.home-contacts .social-links__link:focus-visible {
+	background: var(--imidzh-accent);
+	border-color: var(--imidzh-accent);
+	color: #000;
+}
+
+.home-contacts__media {
+	min-height: 280px;
+	border-radius: var(--imidzh-radius);
+	overflow: hidden;
+	border: 1px solid var(--imidzh-border);
+	background: var(--imidzh-surface);
+}
+
+.home-contacts__map {
+	display: block;
+	width: 100%;
+	height: 100%;
+	min-height: 320px;
+	border: 0;
+}
+
+.home-contacts__photo {
+	margin: 0;
+	height: 100%;
+	min-height: 320px;
+}
+
+.home-contacts__photo img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.home-contacts__placeholder {
+	height: 100%;
+	min-height: 280px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	margin: 0;
+	border: 0;
+	border-radius: 0;
+}
+
+.home-contacts__placeholder p {
+	margin: 0;
+	max-width: 22rem;
+	color: var(--imidzh-muted);
+}
+
+@media (max-width: 900px) {
+	.home-quick__grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.home-gallery__grid,
+	.home-transparency__grid,
+	.home-contacts__grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+@media (max-width: 560px) {
+	.home-quick__grid {
+		grid-template-columns: 1fr;
+	}
+}
 .page-layout {
 	display: grid;
 	grid-template-columns: 1fr 280px;

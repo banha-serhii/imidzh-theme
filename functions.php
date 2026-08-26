@@ -7,7 +7,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'IMIDZH_VERSION', '1.1.0' );
+define( 'IMIDZH_VERSION', '1.2.0' );
 define( 'IMIDZH_DIR', get_template_directory() );
 define( 'IMIDZH_URI', get_template_directory_uri() );
 
@@ -32,6 +32,9 @@ if ( file_exists( IMIDZH_DIR . '/inc/pdf-embeds.php' ) ) {
 }
 if ( file_exists( IMIDZH_DIR . '/inc/social-links.php' ) ) {
 	require_once IMIDZH_DIR . '/inc/social-links.php';
+}
+if ( file_exists( IMIDZH_DIR . '/inc/homepage.php' ) ) {
+	require_once IMIDZH_DIR . '/inc/homepage.php';
 }
 
 /**
@@ -277,9 +280,10 @@ function imidzh_customize_register( $wp_customize ) {
 	$wp_customize->add_control(
 		'imidzh_address',
 		array(
-			'label'   => __( 'Адреса у підвалі', 'imidzh' ),
-			'section' => 'title_tagline',
-			'type'    => 'text',
+			'label'       => __( 'Адреса', 'imidzh' ),
+			'description' => __( 'Показується у футері та на головній (бажано з вулицею).', 'imidzh' ),
+			'section'     => 'title_tagline',
+			'type'        => 'text',
 		)
 	);
 }
